@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carteirinha de Estudante - Versão para Impressão</title>
+    <style>
+        /* CSS para carteirinha de estudante - Versão CIE */
+        
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        /* Estilo específico para a frente da carteirinha */
+        .carteirinha-container.frente {
+            max-width: 550px;
+            margin: auto;
+            text-align: center;
+            position: relative;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        /* Estilo para o verso da carteirinha */
+        .carteirinha-container.verso {
+            max-width: 550px;
+            margin: auto;
+            text-align: center;
+            position: relative;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .page-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .carteirinha-wrapper {
+            text-align: start;
+            margin: 20px 0;
+            position: relative;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+        
+        /* Força as imagens principais a respeitarem o wrapper */
+        .carteirinha-wrapper > img {
+            width: 100% !important;
+            height: auto !important;
+            max-width: 100% !important;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* Regras específicas para a foto do aluno (não herda as regras do wrapper) */
+        .transition-opacity img {
+            width: auto !important;
+            height: auto !important;
+            max-width: none !important;
+            object-fit: none;
+            display: inline;
+            margin: 0;
+        }
+        
+        /* CSS específico para as classes de posicionamento da foto do aluno */
+        .w-\[25\%\] {
+            width: 25% !important;
+        }
+        
+        .h-\[50\%\] {
+            height: 50% !important;
+        }
+        
+        .top-\[20\%\] {
+            top: 20% !important;
+        }
+        
+        .left-\[8\%\] {
+            left: 8% !important;
+        }
+        .left-\[37\%\] {
+            left: 37% !important;
+        }
+        
+        .z-50 {
+            z-index: 50 !important;
+        }
+        
+        .absolute {
+            position: absolute !important;
+        }
+        
+        /* CSS para as imagens principais */
+        .rounded-2xl {
+            border-radius: 1rem;
+        }
+        
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        
+        .duration-300 {
+            transition-duration: 0.3s;
+        }
+        
+        /* CSS para dados sobrepostos na carteirinha */
+        .transition-opacity {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+
+        
+        .rounded {
+            border-radius: 0.25rem;
+        }
+        
+        .bg-gray-50 {
+            background-color: #f9fafb;
+        }
+        
+        .text-sm {
+            font-size: 0.875rem;
+        }
+        
+        .font-work {
+            font-family: Arial, sans-serif;
+        }
+        
+        .font-semibold {
+            font-weight: 600;
+        }
+        
+        .max-w-\[60\%\] {
+            max-width: 60%;
+        }
+        
+        .font-bold {
+            font-weight: 700;
+        }
+        
+        .text-lg {
+            font-size: 1.125rem;
+        }
+        
+        .capitalize {
+            text-transform: capitalize;
+        }
+        
+        .gap-\[1px\] {
+            gap: 1px;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .flex-col {
+            flex-direction: column;
+        }
+        
+        .pt-1 {
+            padding-top: 0.25rem;
+        }
+        
+        .bg-white {
+            background-color: white;
+        }
+        
+        .bg-opacity-20 {
+            background-opacity: 0.2;
+        }
+        
+        .grid {
+            display: grid;
+        }
+        
+        .place-items-center {
+            place-items: center;
+        }
+        
+        .bottom-\[5\%\] {
+            bottom: 5%;
+        }
+        
+        .left-\[12\%\] {
+            left: 12%;
+        }
+        
+        .p-1 {
+            padding: 0.25rem;
+        }
+        
+        .w-\[16\%\] {
+            width: 16%;
+        }
+        
+        .h-\[23\%\] {
+            height: 23%;
+        }
+        
+        .w-11\/12 {
+            width: 91.666667%;
+        }
+        
+        .h-11\/12 {
+            height: 91.666667%;
+        }
+        
+        .bottom-\[12\%\] {
+            bottom: 12%;
+        }
+        
+        .gap-5 {
+            gap: 1.25rem;
+        }
+        
+        .text-xs {
+            font-size: 0.75rem;
+        }
+        
+        /* Estilos específicos para impressão */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background: white;
+            }
+            
+            .page-break {
+                page-break-before: always;
+            }
+            
+            .carteirinha-container {
+                page-break-inside: avoid;
+                margin: 0;
+                padding: 20px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            /* Garante que as imagens principais mantenham proporções na impressão */
+            .carteirinha-wrapper > img {
+                width: 100% !important;
+                height: auto !important;
+                max-width: 100% !important;
+                object-fit: contain;
+            }
+            
+           
+            /* CSS específico para as classes de posicionamento na impressão */
+            .w-\[25\%\] {
+                width: 25% !important;
+            }
+            
+            .h-\[50\%\] {
+                height: 50% !important;
+            }
+            
+            .top-\[20\%\] {
+                top: 20% !important;
+            }
+            
+            .left-\[8\%\] {
+                left: 8% !important;
+            }
+            
+            .z-50 {
+                z-index: 50 !important;
+            }
+            
+            .absolute {
+                position: absolute !important;
+            }
+            
+            .page-title {
+                text-align: center;
+                font-family: Arial, sans-serif;
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                color: #333;
+            }
+            
+            /* Ajustes para impressão dos dados sobrepostos */
+            .transition-opacity {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+            
+            .absolute {
+                position: absolute;
+            }
+            
+            .z-50 {
+                z-index: 50;
+            }
+        }
+        
+        /* Responsividade para telas pequenas */
+        @media (max-width: 768px) {
+            .carteirinha-container {
+                margin: 10px;
+                padding: 20px;
+            }
+            
+            .page-title {
+                font-size: 16px;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Página 1: Frente da Carteirinha -->
+    <div class="carteirinha-container frente">
+
+      <div class="carteirinha-wrapper">
+        <img
+          src="https://checkout.carteiradeestudantebrasil.com.br/assets/carterinha-frente-2025-8e0af770.jpg"
+          alt="Preview da carterinha"
+          class="rounded-2xl transition-all duration-300"
+        />
+
+        <div class="duration-300">
+          <img
+            src="image/dino.jpg"
+            alt="foto do aluno"
+            class="absolute z-50 w-[25%] h-[50%] top-[20%] left-[8%] rounded bg-gray-50"
+          />
+          <div
+            class="absolute top-[20%] left-[37%] text-sm font-work font-semibold max-w-[60%]"
+          >
+            <p class="font-bold text-lg capitalize">
+              Fernandino Tavares dos Santos Junior
+            </p>
+            <div class="gap-[1px] flex flex-col">
+              <p class="pt-1"><span>CPF: </span>064.321.556-57</p>
+              <p><span>RG:</span>6917601</p>
+              <p><span>DATA NASC.: </span>18/12/1984</p>
+              <p>IFRS</p>
+              <p>Ciência da Computação</p>
+            </div>
+          </div>
+          <div
+            class="bg-white bg-opacity-20 grid place-items-center absolute bottom-[5%] left-[12%] p-1 w-[16%] h-[23%]"
+          >
+            <img
+              class="w-11/12 h-11/12"
+              src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://abafe.org.br/"
+              alt="qrcode"
+            />
+          </div>
+          <div class="absolute bottom-[12%] flex gap-5 left-[37%] text-xs">
+            <div>
+              <p class="font-semibold">COD. USO</p>
+              <p class="font-bold">d4e5b789</p>
+            </div>
+            <div>
+              <p class="font-semibold">Valido até</p>
+              <p class="font-bold">31/12/2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+
+    <!-- Página 2: Verso da Carteirinha -->
+    <div class="carteirinha-container verso">
+      
+      <div class="carteirinha-wrapper">
+        <img
+          src="https://checkout.carteiradeestudantebrasil.com.br/assets/carteirinha-verso-ad92a496.jpeg"
+          alt="Preview da carterinha verso"
+          class="rounded-2xl transition-all duration-300"
+        />
+      </div>
+    </div>
+  </body>
+</html>
+
